@@ -1,0 +1,35 @@
+# Hostinger / Apache config for the prerendered static Voxo Media site.
+# This file is copied verbatim into the build output (dist/client) by Vite.
+
+# --- Gzip / Brotli compression ---------------------------------------------
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript application/json image/svg+xml
+</IfModule>
+
+# --- Caching ----------------------------------------------------------------
+<IfModule mod_expires.c>
+  ExpiresActive On
+  # Hashed, content-addressed build assets never change → cache for a year.
+  <FilesMatch "\.(js|css|woff2?|png|jpe?g|gif|svg|webp|avif)$">
+    ExpiresDefault "access plus 1 year"
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  # HTML must always be revalidated so visitors get the latest deploy.
+  <FilesMatch "\.html$">
+    ExpiresDefault "access plus 0 seconds"
+    Header set Cache-Control "public, max-age=0, must-revalidate"
+  </FilesMatch>
+</IfModule>
+
+# --- Routing ----------------------------------------------------------------
+# Every real route (/, /about, /work, ...) is prerendered to its own
+# index.html, so Apache serves those directly. For any URL that does NOT map to
+# an existing file or directory, fall back to the app shell so the client router
+# can render the styled 404 page instead of Apache's default error page.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+  RewriteRule ^ /index.html [L]
+</IfModule>

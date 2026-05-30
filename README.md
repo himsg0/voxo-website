@@ -10,6 +10,7 @@ server-side runtime required**.
 ## Table of contents
 
 - [Overview](#overview)
+- [Screenshots](#screenshots)
 - [Tech stack](#tech-stack)
 - [Pages](#pages)
 - [How it works (static prerendering)](#how-it-works-static-prerendering)
@@ -33,6 +34,31 @@ Although the project is built on **TanStack Start** (a framework that supports
 server-side rendering), SSR is **not** used in production. Instead, every page is
 **prerendered to static HTML at build time**, giving the SEO and direct-link
 benefits of SSR without needing a running server.
+
+## Screenshots
+
+### Home
+
+![Home page](./docs/screenshots/home.png)
+
+### Contact
+
+![Contact page](./docs/screenshots/contact.png)
+
+<table>
+  <tr>
+    <td width="50%"><strong>Work</strong><br/><img src="./docs/screenshots/work.png" alt="Work page" /></td>
+    <td width="50%"><strong>Services</strong><br/><img src="./docs/screenshots/services.png" alt="Services page" /></td>
+  </tr>
+  <tr>
+    <td width="50%"><strong>About</strong><br/><img src="./docs/screenshots/about.png" alt="About page" /></td>
+    <td width="50%"><strong>Culture</strong><br/><img src="./docs/screenshots/culture.png" alt="Culture page" /></td>
+  </tr>
+  <tr>
+    <td width="50%"><strong>Insights</strong><br/><img src="./docs/screenshots/insights.png" alt="Insights page" /></td>
+    <td width="50%"></td>
+  </tr>
+</table>
 
 ## Tech stack
 
